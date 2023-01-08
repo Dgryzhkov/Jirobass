@@ -15,22 +15,16 @@ class SplashActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        val mp: Unit = MediaPlayer.create(this, R.raw.splash_audio).start()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val mp: Unit = MediaPlayer.create(this, R.raw.splash_audio).start()
-
-
-        timer = object : CountDownTimer(2000, 2000) {
-
+        timer = object : CountDownTimer(3000, 1000) {
             override fun onTick(p0: Long) {
-
             }
 
             override fun onFinish() {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-
             }
         }.start()
 
