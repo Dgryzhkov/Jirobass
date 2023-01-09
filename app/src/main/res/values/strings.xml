@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Jirobass</string>
     <string name="slogan">На пути к совершенству</string>
+    <string name="day">День:</string>
 </resources>
