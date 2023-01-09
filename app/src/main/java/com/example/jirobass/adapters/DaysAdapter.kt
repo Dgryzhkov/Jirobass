@@ -20,7 +20,8 @@ class DaysAdapter : ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator())
         fun setData(day: DayModel) = with(binding) {
             val name = root.context.getString(R.string.day) + " ${adapterPosition + 1}"
             tvName.text = name
-            val exCounter = day.exercises.split(",").size.toString()
+            val exCounter = root.context.getString(R.string.exercise) + " " +
+                day.exercises.split(",").size.toString()
             tvExCounter.text = exCounter
         }
     }
