@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jirobass.R
+import com.example.jirobass.adapters.DayModel
 import com.example.jirobass.databinding.FragmentDaysBinding
 
 
@@ -18,6 +19,14 @@ class DaysFragment : Fragment() {
     ): View {
         binding = FragmentDaysBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    private fun fillDaysArray(): ArrayList<DayModel> {
+        val tArray = ArrayList<DayModel>()
+        resources.getStringArray(R.array.day_exercises).forEach {
+            tArray.add(DayModel(it, false))
+        }
+        return tArray
     }
 
     companion object {
