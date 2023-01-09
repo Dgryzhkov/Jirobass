@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jirobass.R
 import com.example.jirobass.adapters.DayModel
 import com.example.jirobass.adapters.DaysAdapter
+import com.example.jirobass.adapters.ExercisesModel
 import com.example.jirobass.databinding.FragmentDaysBinding
 import com.example.jirobass.utils.FragmentManager
 
@@ -43,6 +44,17 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
             tArray.add(DayModel(it, false))
         }
         return tArray
+    }
+
+
+    private fun fillExercisesList(day: DayModel) {
+        val tempList = ArrayList<ExercisesModel>()
+        day.exercises.split(",").forEach {
+            val exercisesList = resources.getStringArray(R.array.exercise)
+            val exercise = exercisesList[it.toInt()]
+            val exerciseArray = exercise.split("|")
+            tempList.add(ExercisesModel(exerciseArray[0], exerciseArray[1], exerciseArray[2]))
+        }
     }
 
     companion object {
