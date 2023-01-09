@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jirobass.R
 import com.example.jirobass.adapters.DayModel
 import com.example.jirobass.adapters.DaysAdapter
-import com.example.jirobass.adapters.ExercisesModel
+import com.example.jirobass.adapters.ExerciseModel
 import com.example.jirobass.databinding.FragmentDaysBinding
 import com.example.jirobass.utils.FragmentManager
 import com.example.jirobass.utils.MainViewModel
@@ -19,9 +19,8 @@ import com.example.jirobass.utils.MainViewModel
 
 class DaysFragment : Fragment(), DaysAdapter.Listener {
     private lateinit var binding: FragmentDaysBinding
+
     private val model: MainViewModel by activityViewModels()
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,12 +52,12 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
 
     private fun fillExercisesList(day: DayModel) {
-        val tempList = ArrayList<ExercisesModel>()
+        val tempList = ArrayList<ExerciseModel>()
         day.exercises.split(",").forEach {
             val exercisesList = resources.getStringArray(R.array.exercise)
             val exercise = exercisesList[it.toInt()]
             val exerciseArray = exercise.split("|")
-            tempList.add(ExercisesModel(exerciseArray[0], exerciseArray[1], exerciseArray[2]))
+            tempList.add(ExerciseModel(exerciseArray[0], exerciseArray[1], exerciseArray[2]))
         }
         model.mutableListExercises.value = tempList
     }
