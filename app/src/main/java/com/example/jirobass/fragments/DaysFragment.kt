@@ -11,9 +11,10 @@ import com.example.jirobass.R
 import com.example.jirobass.adapters.DayModel
 import com.example.jirobass.adapters.DaysAdapter
 import com.example.jirobass.databinding.FragmentDaysBinding
+import com.example.jirobass.utils.FragmentManager
 
 
-class DaysFragment : Fragment() {
+class DaysFragment : Fragment(), DaysAdapter.Listener {
     private lateinit var binding: FragmentDaysBinding
 
     override fun onCreateView(
@@ -30,7 +31,7 @@ class DaysFragment : Fragment() {
     }
 
     private fun initRcView() = with(binding) {
-        val adapter = DaysAdapter()
+        val adapter = DaysAdapter(this@DaysFragment)
         rcViewDays.layoutManager = LinearLayoutManager(activity as AppCompatActivity)
         rcViewDays.adapter = adapter
         adapter.submitList(fillDaysArray())
@@ -47,5 +48,12 @@ class DaysFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = DaysFragment()
+    }
+
+    override fun onClick(day: DayModel) {
+        FragmentManager.setFragment(
+            ExercisesListFragment.newInstance(),
+            activity as AppCompatActivity
+        )
     }
 }
