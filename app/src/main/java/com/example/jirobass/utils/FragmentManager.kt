@@ -9,9 +9,14 @@ import org.w3c.dom.DocumentFragment
  *@Author Dgryzhkov
  */
 object FragmentManager {
+
+    var currentFragment: Fragment? = null
+
+
     fun setFragment(newFragment: Fragment, act: AppCompatActivity) {
         val transaction = act.supportFragmentManager.beginTransaction()
         transaction.replace(R.id.placeHolder, newFragment)
         transaction.commit()
+        currentFragment = newFragment
     }
 }

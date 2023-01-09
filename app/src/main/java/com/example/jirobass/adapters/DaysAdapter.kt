@@ -12,17 +12,20 @@ import com.example.jirobass.databinding.DaysListItemBinding
 /**
  *@Author Dgryzhkov
  */
-class DaysAdapter : ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator()) {
+class DaysAdapter(var listener: Listener) :
+    ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator()) {
 
     class DayHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = DaysListItemBinding.bind(view)
 
-        fun setData(day: DayModel) = with(binding) {
+        fun setData(day: DayModel, listener: Listener) = with(binding) {
             val name = root.context.getString(R.string.day) + " ${adapterPosition + 1}"
             tvName.text = name
             val exCounter = root.context.getString(R.string.exercise) + " " +
-                day.exercises.split(",").size.toString()
+                    day.exercises.split(",").size.toString()
             tvExCounter.text = exCounter
+
+            itemView.setOnClickListener { listener.onClick(day) }
         }
     }
 
@@ -33,7 +36,7 @@ class DaysAdapter : ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator())
     }
 
     override fun onBindViewHolder(holder: DayHolder, position: Int) {
-        holder.setData(getItem(position))
+        holder.setData(getItem(position), listener)
     }
 
     class MyComparator : DiffUtil.ItemCallback<DayModel>() {
@@ -45,5 +48,9 @@ class DaysAdapter : ListAdapter<DayModel, DaysAdapter.DayHolder>(MyComparator())
             return oldItem == newItem
         }
 
+    }
+
+    interface Listener {
+        fun onClick(day: DayModel)
     }
 }
