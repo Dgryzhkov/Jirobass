@@ -18,8 +18,8 @@ class SplashActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        MediaPlayer.create(this, R.raw.splash_audio).start()
-        timer = object : CountDownTimer(3000, 1000) {
+//        MediaPlayer.create(this, R.raw.splash_audio).start()
+        timer = object : CountDownTimer(2000, 1000) {
             override fun onTick(p0: Long) {
             }
 
