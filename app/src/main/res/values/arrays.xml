@@ -2,7 +2,7 @@
 <resources>
     <string-array name="exercise">
         <item>Relax|30|cat-animal.gif</item><!--0-->
-        <item>V type ABS|x30|v_ab.gif</item><!--1-->
+        <item>V type ABS|30|v_ab.gif</item><!--1-->
         <item>Glute activation|x10|activacion_de_glutios.gif</item> <!--2-->
         <item>Bike|40|bicicleta.gif</item><!--3-->
         <item>Push-ups|x30|flexiones.gif</item><!--4-->

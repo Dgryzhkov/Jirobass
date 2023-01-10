@@ -100,6 +100,7 @@
                 android:id="@+id/imNext"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

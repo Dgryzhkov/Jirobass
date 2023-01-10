@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import com.example.jirobass.R
 import com.example.jirobass.adapters.ExerciseModel
 import com.example.jirobass.databinding.ExerciseBinding
 import com.example.jirobass.utils.FragmentManager
@@ -48,6 +49,7 @@ class ExerciseFragment : Fragment() {
             val ex = exList?.get(exerciseCounter++) ?: return
             showExercise(ex)
             setExerciseType(ex)
+            showNextExercise()
         } else {
             Toast.makeText(activity, "Done", Toast.LENGTH_LONG).show()
         }
@@ -64,6 +66,31 @@ class ExerciseFragment : Fragment() {
             binding.tvTime.text = exercise.time
         } else {
             startTimer(exercise)
+        }
+    }
+
+    private fun showNextExercise() = with(binding) {
+        if (exerciseCounter < exList?.size!!) {
+            val ex = exList?.get(exerciseCounter) ?: return
+            imNext.setImageDrawable(GifDrawable(root.context.assets, ex.image))
+            setTimeType(ex)
+        } else {
+            imNext.setImageDrawable(
+                GifDrawable(
+                    root.context.assets,
+                    "congrats-congratulations.gif"
+                )
+            )
+            tvNextName.text = getString(R.string.done)
+        }
+    }
+
+    private fun setTimeType(ex: ExerciseModel) {
+        if (ex.time.startsWith("x")) {
+            binding.tvNextName.text = ex.time
+        } else {
+            val name = ex.name + "  ${TimeUtils.getTime(ex.time.toLong() * 1000)} "
+            binding.tvNextName.text = name
         }
     }
 
