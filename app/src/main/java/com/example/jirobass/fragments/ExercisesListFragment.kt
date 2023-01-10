@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jirobass.adapters.ExerciseAdapter
 import com.example.jirobass.databinding.ExercisesListFragmentBinding
+import com.example.jirobass.utils.FragmentManager
 import com.example.jirobass.utils.MainViewModel
 
 
@@ -40,6 +42,9 @@ class ExercisesListFragment : Fragment() {
         adapter = ExerciseAdapter()
         rcView.layoutManager = LinearLayoutManager(activity)
         rcView.adapter = adapter
+        bStart.setOnClickListener{
+            FragmentManager.setFragment(WaitingFragment.newInstance(),activity as AppCompatActivity)
+        }
     }
 
     companion object {
