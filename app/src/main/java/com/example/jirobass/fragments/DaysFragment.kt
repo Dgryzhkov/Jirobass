@@ -33,6 +33,7 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRcView()
+
     }
 
     private fun initRcView() = with(binding) {
