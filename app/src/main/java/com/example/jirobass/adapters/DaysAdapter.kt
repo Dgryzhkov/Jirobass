@@ -25,7 +25,7 @@ class DaysAdapter(var listener: Listener) :
                     day.exercises.split(",").size.toString()
             tvExCounter.text = exCounter
 
-            itemView.setOnClickListener { listener.onClick(day) }
+            itemView.setOnClickListener { listener.onClick(day.copy(dayNumber = adapterPosition + 1)) }
         }
     }
 
