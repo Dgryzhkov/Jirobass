@@ -33,14 +33,15 @@ class ExercisesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         init()
         model.mutableListExercises.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            for (i in 0 until model.getExerciseCount()) {
+                it[i] = it[i].copy(isDone = true)
+                adapter.submitList(it)
 
+            }
         }
     }
-
 
     private fun init() = with(binding) {
         ab = (activity as AppCompatActivity).supportActionBar

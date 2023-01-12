@@ -14,21 +14,23 @@ import pl.droidsonroids.gif.GifDrawable
 /**
  *@Author Dgryzhkov
  */
-class ExerciseAdapter() : ListAdapter<ExerciseModel, ExerciseAdapter.ExerciseHolder>(MyComparator()) {
+class ExerciseAdapter() :
+    ListAdapter<ExerciseModel, ExerciseAdapter.ExerciseHolder>(MyComparator()) {
 
-    class ExerciseHolder(view: View) : RecyclerView.ViewHolder(view){
+    class ExerciseHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ExerciseListItemBinding.bind(view)
 
-        fun setData(exercise: ExerciseModel) = with(binding){
+        fun setData(exercise: ExerciseModel) = with(binding) {
             tvName.text = exercise.name
             tvCount.text = exercise.time
+            chB.isChecked = exercise.isDone
             imEx.setImageDrawable(GifDrawable(root.context.assets, exercise.image))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseHolder {
-        val view = LayoutInflater.from(parent.context).
-        inflate(R.layout.exercise_list_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.exercise_list_item, parent, false)
         return ExerciseHolder(view)
     }
 
@@ -36,7 +38,7 @@ class ExerciseAdapter() : ListAdapter<ExerciseModel, ExerciseAdapter.ExerciseHol
         holder.setData(getItem(position))
     }
 
-    class MyComparator : DiffUtil.ItemCallback<ExerciseModel>(){
+    class MyComparator : DiffUtil.ItemCallback<ExerciseModel>() {
         override fun areItemsTheSame(oldItem: ExerciseModel, newItem: ExerciseModel): Boolean {
             return oldItem == newItem
         }
