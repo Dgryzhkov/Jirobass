@@ -33,6 +33,7 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model.currentDay = 0
         initRcView()
 
     }
@@ -49,7 +50,9 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
     private fun fillDaysArray(): ArrayList<DayModel> {
         val tArray = ArrayList<DayModel>()
         resources.getStringArray(R.array.day_exercises).forEach {
-            tArray.add(DayModel(it, 0, false))
+            model.currentDay++
+            val exCounter = it.split(",").size
+            tArray.add(DayModel(it, 0, model.getExerciseCount() == exCounter))
         }
         return tArray
     }
