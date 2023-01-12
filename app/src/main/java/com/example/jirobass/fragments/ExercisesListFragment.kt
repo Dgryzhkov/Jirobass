@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jirobass.R
 import com.example.jirobass.adapters.ExerciseAdapter
 import com.example.jirobass.databinding.ExercisesListFragmentBinding
 import com.example.jirobass.utils.FragmentManager
@@ -17,6 +19,7 @@ import com.example.jirobass.utils.MainViewModel
 class ExercisesListFragment : Fragment() {
     private lateinit var binding: ExercisesListFragmentBinding
     private lateinit var adapter: ExerciseAdapter
+    private var ab: ActionBar? = null
 
     private val model: MainViewModel by activityViewModels()
 
@@ -30,6 +33,7 @@ class ExercisesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         init()
         model.mutableListExercises.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -39,11 +43,16 @@ class ExercisesListFragment : Fragment() {
 
 
     private fun init() = with(binding) {
+        ab = (activity as AppCompatActivity).supportActionBar
+        ab?.title = getString(R.string.exercises)
         adapter = ExerciseAdapter()
         rcView.layoutManager = LinearLayoutManager(activity)
         rcView.adapter = adapter
-        bStart.setOnClickListener{
-            FragmentManager.setFragment(WaitingFragment.newInstance(),activity as AppCompatActivity)
+        bStart.setOnClickListener {
+            FragmentManager.setFragment(
+                WaitingFragment.newInstance(),
+                activity as AppCompatActivity
+            )
         }
     }
 
