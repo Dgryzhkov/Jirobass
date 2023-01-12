@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -37,6 +36,7 @@ class ExerciseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        exerciseCounter = model.getExerciseCount()
         ab = (activity as AppCompatActivity).supportActionBar
         model.mutableListExercises.observe(viewLifecycleOwner) {
             exList = it
@@ -122,7 +122,7 @@ class ExerciseFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        model.savePref(model.currentDay.toString(), exerciseCounter)
+        model.savePref(model.currentDay.toString(), exerciseCounter - 1)
         timer?.cancel()
     }
 
