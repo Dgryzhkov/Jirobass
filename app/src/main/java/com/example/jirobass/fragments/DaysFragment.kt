@@ -1,10 +1,8 @@
 package com.example.jirobass.fragments
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -19,9 +17,15 @@ import com.example.jirobass.utils.MainViewModel
 
 
 class DaysFragment : Fragment(), DaysAdapter.Listener {
+    private lateinit var adapter: DaysAdapter
     private lateinit var binding: FragmentDaysBinding
     private var ab: ActionBar? = null
     private val model: MainViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +42,21 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        return inflater.inflate(R.menu.main_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.reset) {
+            model.pref?.edit()?.clear()?.apply()
+            adapter.submitList(fillDaysArray())
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun initRcView() = with(binding) {
-        val adapter = DaysAdapter(this@DaysFragment)
+        adapter = DaysAdapter(this@DaysFragment)
         ab = (activity as AppCompatActivity).supportActionBar
         ab?.title = getString(R.string.days)
         rcViewDays.layoutManager = LinearLayoutManager(activity as AppCompatActivity)
