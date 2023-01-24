@@ -16,6 +16,7 @@ import pl.droidsonroids.gif.GifDrawable
 class DayFinishFragment : Fragment() {
     private lateinit var binding: DayFinishBinding
     private var ab: ActionBar? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,19 +29,14 @@ class DayFinishFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         ab = (activity as AppCompatActivity).supportActionBar
         ab?.title = getString(R.string.done)
-        binding.imMain.setImageDrawable(
-            GifDrawable(
-                (activity as AppCompatActivity).assets,
-                "congrats-congratulations.gif"
-            )
-        )
+        binding.imMain.setImageDrawable(GifDrawable((activity as AppCompatActivity).assets,
+            "congrats-congratulations.gif"))
         binding.bDone.setOnClickListener {
-            FragmentManager.setFragment(
-                DaysFragment.newInstance(),
-                activity as AppCompatActivity
-            )
+            FragmentManager.setFragment(DaysFragment.newInstance(),
+                activity as AppCompatActivity)
         }
     }
+
 
     companion object {
         @JvmStatic
