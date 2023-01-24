@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/blue" />
+                android:textColor="@color/blue_dark" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

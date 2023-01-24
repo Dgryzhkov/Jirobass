@@ -15,11 +15,10 @@ import com.example.jirobass.utils.TimeUtils
 
 
 const val COUNT_DOWN_TIME = 11000L
-
 class WaitingFragment : Fragment() {
+    private var ab: ActionBar? = null
     private lateinit var binding: WaitingFragmentBinding
     private lateinit var timer: CountDownTimer
-    private var ab: ActionBar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,20 +36,16 @@ class WaitingFragment : Fragment() {
         startTimer()
     }
 
-
-    private fun startTimer() = with(binding) {
-        timer = object : CountDownTimer(COUNT_DOWN_TIME, 1) {
+    private fun startTimer() = with(binding){
+        timer = object : CountDownTimer(COUNT_DOWN_TIME, 1){
             override fun onTick(restTime: Long) {
                 tvTimer.text = TimeUtils.getTime(restTime)
                 pBar.progress = restTime.toInt()
-
             }
 
             override fun onFinish() {
-                FragmentManager.setFragment(
-                    ExerciseFragment.newInstance(),
-                    activity as AppCompatActivity
-                )
+                FragmentManager.setFragment(ExercisesFragment.newInstance(),
+                    activity as AppCompatActivity)
             }
 
         }.start()

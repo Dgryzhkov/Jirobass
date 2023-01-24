@@ -11,15 +11,15 @@ import com.example.jirobass.adapters.ExerciseModel
  *@Author Dgryzhkov
  */
 class MainViewModel : ViewModel() {
-    val mutableListExercises = MutableLiveData<ArrayList<ExerciseModel>>()
+    val mutableListExercise = MutableLiveData<ArrayList<ExerciseModel>>()
     var pref: SharedPreferences? = null
     var currentDay = 0
 
-    fun savePref(key: String, value: Int) {
+    fun savePref(key: String, value: Int){
         pref?.edit()?.putInt(key, value)?.apply()
     }
 
-    fun getExerciseCount(): Int {
+    fun getExerciseCount(): Int{
         return pref?.getInt(currentDay.toString(), 0) ?: 0
     }
 }

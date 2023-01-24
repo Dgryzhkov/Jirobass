@@ -40,7 +40,6 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         model.currentDay = 0
         initRcView()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -52,7 +51,7 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
             DialogManager.showDialog(
                 activity as AppCompatActivity,
                 R.string.reset_days_message,
-                object : DialogManager.Listener {
+                object : DialogManager.Listener{
                     override fun onClick() {
                         model.pref?.edit()?.clear()?.apply()
                         adapter.submitList(fillDaysArray())
@@ -63,7 +62,7 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun initRcView() = with(binding) {
+    private fun initRcView() = with(binding){
         adapter = DaysAdapter(this@DaysFragment)
         ab = (activity as AppCompatActivity).supportActionBar
         ab?.title = getString(R.string.days)
@@ -72,38 +71,37 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
         adapter.submitList(fillDaysArray())
     }
 
-    private fun fillDaysArray(): ArrayList<DayModel> {
+    private fun fillDaysArray(): ArrayList<DayModel>{
         val tArray = ArrayList<DayModel>()
         var daysDoneCounter = 0
         resources.getStringArray(R.array.day_exercises).forEach {
             model.currentDay++
             val exCounter = it.split(",").size
-            tArray.add(DayModel(it, 0, model.getExerciseCount() == exCounter))
+            tArray.add(DayModel(it, 0,model.getExerciseCount() == exCounter))
         }
         binding.pB.max = tArray.size
         tArray.forEach {
-            if (it.isDone) daysDoneCounter++
+            if(it.isDone) daysDoneCounter++
         }
         updateRestDaysUI(tArray.size - daysDoneCounter, tArray.size)
         return tArray
     }
 
-    private fun updateRestDaysUI(restDays: Int, days: Int) = with(binding) {
-        val rDays = getString(R.string.rest) + " $restDays" + getString(R.string.rest_days)
+    private fun updateRestDaysUI(restDays: Int, days: Int) = with(binding){
+        val rDays = getString(R.string.rest) + " $restDays " + getString(R.string.rest_days)
         tvRestDays.text = rDays
         pB.progress = days - restDays
     }
 
-
-    private fun fillExercisesList(day: DayModel) {
+    private fun fillExerciseList(day: DayModel){
         val tempList = ArrayList<ExerciseModel>()
         day.exercises.split(",").forEach {
-            val exercisesList = resources.getStringArray(R.array.exercise)
-            val exercise = exercisesList[it.toInt()]
+            val exerciseList = resources.getStringArray(R.array.exercise)
+            val exercise = exerciseList[it.toInt()]
             val exerciseArray = exercise.split("|")
             tempList.add(ExerciseModel(exerciseArray[0], exerciseArray[1], false, exerciseArray[2]))
         }
-        model.mutableListExercises.value = tempList
+        model.mutableListExercise.value = tempList
     }
 
     companion object {
@@ -112,26 +110,22 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
     }
 
     override fun onClick(day: DayModel) {
-        if (!day.isDone) {
-            fillExercisesList(day)
+        if(!day.isDone){
+            fillExerciseList(day)
             model.currentDay = day.dayNumber
-            FragmentManager.setFragment(
-                ExercisesListFragment.newInstance(),
-                activity as AppCompatActivity
-            )
+            FragmentManager.setFragment(ExercisesListFragment.newInstance(),
+                activity as AppCompatActivity)
         } else {
             DialogManager.showDialog(
                 activity as AppCompatActivity,
                 R.string.reset_day_message,
-                object : DialogManager.Listener {
+                object : DialogManager.Listener{
                     override fun onClick() {
                         model.savePref(day.dayNumber.toString(), 0)
-                        fillExercisesList(day)
+                        fillExerciseList(day)
                         model.currentDay = day.dayNumber
-                        FragmentManager.setFragment(
-                            ExercisesListFragment.newInstance(),
-                            activity as AppCompatActivity
-                        )
+                        FragmentManager.setFragment(ExercisesListFragment.newInstance(),
+                            activity as AppCompatActivity)
                     }
                 }
             )

@@ -18,7 +18,7 @@ import com.example.jirobass.utils.TimeUtils
 import pl.droidsonroids.gif.GifDrawable
 
 
-class ExerciseFragment : Fragment() {
+class ExercisesFragment : Fragment() {
     private var timer: CountDownTimer? = null
     private lateinit var binding: ExerciseBinding
     private var exerciseCounter = 0
@@ -40,7 +40,7 @@ class ExerciseFragment : Fragment() {
         currentDay = model.currentDay
         exerciseCounter = model.getExerciseCount()
         ab = (activity as AppCompatActivity).supportActionBar
-        model.mutableListExercises.observe(viewLifecycleOwner) {
+        model.mutableListExercise.observe(viewLifecycleOwner){
             exList = it
             nextExercise()
         }
@@ -49,77 +49,66 @@ class ExerciseFragment : Fragment() {
         }
     }
 
-    private fun nextExercise() {
-        if (exerciseCounter < exList?.size!!) {
+    private fun nextExercise(){
+        if(exerciseCounter < exList?.size!!){
             val ex = exList?.get(exerciseCounter++) ?: return
             showExercise(ex)
             setExerciseType(ex)
             showNextExercise()
         } else {
             exerciseCounter++
-            FragmentManager.setFragment(
-                DayFinishFragment.newInstance(),
-                activity as AppCompatActivity
-            )
+            FragmentManager.setFragment(DayFinishFragment.newInstance(),
+                activity as AppCompatActivity)
         }
     }
 
-
-    private fun showExercise(exercise: ExerciseModel) = with(binding) {
+    private fun showExercise(exercise: ExerciseModel) = with(binding){
         imMain.setImageDrawable(GifDrawable(root.context.assets, exercise.image))
         tvName.text = exercise.name
-        val title = "$exerciseCounter /  ${exList?.size}"
+        val title = "$exerciseCounter / ${exList?.size}"
         ab?.title = title
     }
 
-    private fun setExerciseType(exercise: ExerciseModel) {
-        if (exercise.time.startsWith("x")) {
+    private fun setExerciseType(exercise: ExerciseModel){
+        if(exercise.time.startsWith("x")){
             binding.tvTime.text = exercise.time
         } else {
             startTimer(exercise)
         }
     }
 
-    private fun showNextExercise() = with(binding) {
-        if (exerciseCounter < exList?.size!!) {
+    private fun showNextExercise() = with(binding){
+        if(exerciseCounter < exList?.size!!){
             val ex = exList?.get(exerciseCounter) ?: return
             imNext.setImageDrawable(GifDrawable(root.context.assets, ex.image))
             setTimeType(ex)
         } else {
-            imNext.setImageDrawable(
-                GifDrawable(
-                    root.context.assets,
-                    "congrats-congratulations.gif"
-                )
-            )
+            imNext.setImageDrawable(GifDrawable(root.context.assets, "congrats-congratulations.gif"))
             tvNextName.text = getString(R.string.done)
         }
     }
 
-    private fun setTimeType(ex: ExerciseModel) {
-        if (ex.time.startsWith("x")) {
+    private fun setTimeType(ex: ExerciseModel){
+        if(ex.time.startsWith("x")){
             binding.tvNextName.text = ex.time
         } else {
-            val name = ex.name + "  ${TimeUtils.getTime(ex.time.toLong() * 1000)} "
+            val name = ex.name + ": ${TimeUtils.getTime(ex.time.toLong() * 1000)}"
             binding.tvNextName.text = name
         }
     }
 
-    private fun startTimer(exercise: ExerciseModel) = with(binding) {
+    private fun startTimer(exercise: ExerciseModel) = with(binding){
         progressBar.max = exercise.time.toInt() * 1000
         timer?.cancel()
-        timer = object : CountDownTimer(exercise.time.toLong() * 1000, 1) {
+        timer = object : CountDownTimer(exercise.time.toLong() * 1000, 1){
             override fun onTick(restTime: Long) {
                 tvTime.text = TimeUtils.getTime(restTime)
-                progressBar.progress = restTime.toInt(
-                )
-
+                progressBar.progress = restTime.toInt()
             }
 
             override fun onFinish() {
                 nextExercise()
             }
-
         }.start()
     }
 
@@ -131,6 +120,6 @@ class ExerciseFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = ExerciseFragment()
+        fun newInstance() = ExercisesFragment()
     }
 }
