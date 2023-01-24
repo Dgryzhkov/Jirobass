@@ -12,6 +12,7 @@ import com.example.jirobass.adapters.DayModel
 import com.example.jirobass.adapters.DaysAdapter
 import com.example.jirobass.adapters.ExerciseModel
 import com.example.jirobass.databinding.FragmentDaysBinding
+import com.example.jirobass.utils.DialogManager
 import com.example.jirobass.utils.FragmentManager
 import com.example.jirobass.utils.MainViewModel
 
@@ -48,9 +49,16 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.reset) {
-            model.pref?.edit()?.clear()?.apply()
-            adapter.submitList(fillDaysArray())
-
+            DialogManager.showDialog(
+                activity as AppCompatActivity,
+                R.string.reset_days_message,
+                object : DialogManager.Listener {
+                    override fun onClick() {
+                        model.pref?.edit()?.clear()?.apply()
+                        adapter.submitList(fillDaysArray())
+                    }
+                }
+            )
         }
         return super.onOptionsItemSelected(item)
     }
@@ -104,11 +112,29 @@ class DaysFragment : Fragment(), DaysAdapter.Listener {
     }
 
     override fun onClick(day: DayModel) {
-        fillExercisesList(day)
-        model.currentDay = day.dayNumber
-        FragmentManager.setFragment(
-            ExercisesListFragment.newInstance(),
-            activity as AppCompatActivity
-        )
+        if (!day.isDone) {
+            fillExercisesList(day)
+            model.currentDay = day.dayNumber
+            FragmentManager.setFragment(
+                ExercisesListFragment.newInstance(),
+                activity as AppCompatActivity
+            )
+        } else {
+            DialogManager.showDialog(
+                activity as AppCompatActivity,
+                R.string.reset_day_message,
+                object : DialogManager.Listener {
+                    override fun onClick() {
+                        model.savePref(day.dayNumber.toString(), 0)
+                        fillExercisesList(day)
+                        model.currentDay = day.dayNumber
+                        FragmentManager.setFragment(
+                            ExercisesListFragment.newInstance(),
+                            activity as AppCompatActivity
+                        )
+                    }
+                }
+            )
+        }
     }
 }
