@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="exercise">
-        <item>Relax|30|cat-animal.gif</item><!--0-->
-        <item>V type ABS|30|v_ab.gif</item><!--1-->
-        <item>Glute activation|x10|activacion_de_glutios.gif</item> <!--2-->
-        <item>Bike|40|bicicleta.gif</item><!--3-->
-        <item>Push-ups|x30|flexiones.gif</item><!--4-->
-        <item>Jump Push-ups|30|flexiones_salto.gif</item><!--5-->
-        <item>Knees to chest|30|rodillas_al_pecho.gif</item><!--6-->
-        <item>Knees to chest (Hard)|30|rodillas_inclinados_al_pecho.gif</item><!--7-->
-        <item>Chill|10|love-chill.gif</item><!--8-->
+        <item>Relax|30|love_chill.gif</item><!--0-->
+        <item>crossbar_corner|30|crossbar_corner.gif</item><!--1-->
+        <item>push_ups_on_bars|30|push_ups_on_bars.gif</item><!--2-->
+        <item>pull_ups_with_a_reverse_grip_on_the_crossbar|30|pull_ups_with_a_reverse_grip_on_the_crossbar.gif</item><!--3-->
+        <item>push_ups|30|push_ups.gif</item><!--4-->
+        <item>squat_on_one_leg|30|squat_on_one_leg.gif</item><!--5-->
+        <item>reverse_push_ups|30|reverse_push_ups.gif</item><!--6-->
+        <item>congrats_congratulations|30|congrats_congratulations.gif</item><!--7-->
+
+
     </string-array>
     <string-array name="day_exercises">
-        <item>1,0,3,0,5,8,5,0,2,0,7,0,1,8</item> <!-- Day 1 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 2 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 3 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 4 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 5 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 6 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 7 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 8 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 9 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 10 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 11 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 12 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 13 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 14 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 15 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 16 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 17 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 18 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 19 -->
-        <item>1,0,3,0,5,0,5,0,2,0,7,0,1,0,1,0,3,0,5,0,5,8</item> <!-- Day 20 -->
+        <item>1,0,2,0,3,0,4,0,5,0,6</item> <!-- Day 1 -->
+
     </string-array>
 </resources>
