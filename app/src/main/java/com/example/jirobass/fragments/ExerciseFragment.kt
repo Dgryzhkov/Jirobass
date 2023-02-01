@@ -91,7 +91,7 @@ class ExercisesFragment : Fragment() {
             imNext.setImageDrawable(
                 GifDrawable(
                     root.context.assets,
-                    "congrats-congratulations.gif"
+                    "congrats_congratulations.gif"
                 )
             )
             tvNextName.text = getString(R.string.done)

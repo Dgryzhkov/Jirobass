@@ -30,7 +30,7 @@ class DayFinishFragment : Fragment() {
         ab = (activity as AppCompatActivity).supportActionBar
         ab?.title = getString(R.string.done)
         binding.imMain.setImageDrawable(GifDrawable((activity as AppCompatActivity).assets,
-            "congrats-congratulations.gif"))
+            "congrats_congratulations.gif"))
         binding.bDone.setOnClickListener {
             FragmentManager.setFragment(DaysFragment.newInstance(),
                 activity as AppCompatActivity)
