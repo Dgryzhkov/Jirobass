@@ -2,6 +2,7 @@ package com.example.jirobass
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.viewModels
 import com.example.jirobass.fragments.DaysFragment
 import com.example.jirobass.utils.FragmentManager
@@ -15,6 +16,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         model.pref = getSharedPreferences("main", MODE_PRIVATE)
         FragmentManager.setFragment(DaysFragment.newInstance(), this)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
     }
 
     override fun onBackPressed() {
