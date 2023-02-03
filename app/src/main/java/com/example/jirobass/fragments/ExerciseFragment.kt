@@ -72,6 +72,13 @@ class ExercisesFragment : Fragment() {
         tvName.text = exercise.name
         val title = "$exerciseCounter / ${exList?.size}"
         ab?.title = title
+
+        var timerPause = false
+        imMain.setOnClickListener{
+            timerPause = !timerPause
+            if (timerPause) timer?.cancel() else timer?.start()
+
+        }
     }
 
     private fun setExerciseType(exercise: ExerciseModel) {
