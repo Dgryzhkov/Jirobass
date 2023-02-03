@@ -1,5 +1,6 @@
 package com.example.jirobass.fragments
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -31,6 +32,7 @@ class ExercisesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = ExerciseBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,6 +42,7 @@ class ExercisesFragment : Fragment() {
         currentDay = model.currentDay
         exerciseCounter = model.getExerciseCount()
         ab = (activity as AppCompatActivity).supportActionBar
+
         model.mutableListExercise.observe(viewLifecycleOwner) {
             exList = it
             nextExercise()
@@ -79,6 +82,7 @@ class ExercisesFragment : Fragment() {
             binding.tvTime.text = exercise.time
         } else {
             startTimer(exercise)
+            val mp: Unit = MediaPlayer.create(context, R.raw.timer).start()
         }
     }
 
@@ -114,10 +118,12 @@ class ExercisesFragment : Fragment() {
             override fun onTick(restTime: Long) {
                 tvTime.text = TimeUtils.getTime(restTime)
                 progressBar.progress = restTime.toInt()
+
             }
 
             override fun onFinish() {
                 nextExercise()
+
             }
         }.start()
     }
