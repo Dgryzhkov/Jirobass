@@ -1,5 +1,6 @@
 package com.example.jirobass.fragments
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,6 +32,7 @@ class DayFinishFragment : Fragment() {
         ab?.title = getString(R.string.done)
         binding.imMain.setImageDrawable(GifDrawable((activity as AppCompatActivity).assets,
             "congrats_congratulations.gif"))
+        val mp: Unit = MediaPlayer.create(context, R.raw.auf).start()
         binding.bDone.setOnClickListener {
             FragmentManager.setFragment(DaysFragment.newInstance(),
                 activity as AppCompatActivity)
