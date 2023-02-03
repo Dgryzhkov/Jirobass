@@ -88,8 +88,9 @@ class ExercisesFragment : Fragment() {
             timer?.cancel()
             binding.tvTime.text = exercise.time
         } else {
-            startTimer(exercise)
             val mp: Unit = MediaPlayer.create(context, R.raw.timer).start()
+            startTimer(exercise)
+
         }
     }
 
